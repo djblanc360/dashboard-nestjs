@@ -21,16 +21,12 @@ export class AuthService {
         });
 
         if (!user) {
-            throw new UnauthorizedException();
-        }
-
-        if (user.password !== password) {
-            throw new UnauthorizedException();
+            throw new UnauthorizedException('User not found');
         }
 
         const valid = await bcrypt.compare(password, user.password);
         if (!valid) {
-            throw new UnauthorizedException();
+            throw new UnauthorizedException('Invalid password');
         }
         const payload = { id: user.id, name: user.name, email: user.email };
 
