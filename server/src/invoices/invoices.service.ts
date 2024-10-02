@@ -20,6 +20,7 @@ export class InvoicesService {
       cursor,
       where,
       orderBy,
+      include: { user: true },
     });
   }
 
@@ -28,7 +29,30 @@ export class InvoicesService {
   ): Promise<Invoice | null> {
     return this.prisma.invoice.findUnique({
       where: invoiceWhereUniqueInput,
+      include: { user: true },
     });
+  }
+
+  // adding this just for testing
+  async postInvoice(
+    data: Prisma.InvoiceCreateInput,
+  ): Promise<Invoice> {
+    return this.prisma.invoice.create({
+      data,
+    });
+  }
+
+  async getInvoicesTotal(due_date: Date): Promise<number> {
+    return this.prisma.invoice.aggregate({
+      _sum: {
+        amount: true,
+      },
+      where: {
+        due_date: {
+          gte: new Date(due_date),
+        },
+      },
+    }).then((result) => result._sum.amount ?? 0);
   }
   
 }
