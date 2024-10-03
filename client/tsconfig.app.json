@@ -13,7 +13,7 @@
       "@pages/*": ["pages/*"],
       "@hooks/*": ["hooks/*"],
       "@services/*": ["services/*"],
-      "@contexts/*": ["contexts/*"],
+      "@store/*": ["store/*"],
       "@types/*": ["types/*"],
       "@utils/*": ["utils/*"],
       "@assets/*": ["assets/*"]

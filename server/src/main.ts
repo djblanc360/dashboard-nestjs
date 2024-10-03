@@ -28,6 +28,9 @@ async function bootstrap() {
       logger: envToLogger[currentEnv],
     })
   );
+  app.enableCors({
+    origin: 'http://localhost:5173',
+  });
   await app.listen(3000, '0.0.0.0');
 }
 bootstrap();

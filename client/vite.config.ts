@@ -10,7 +10,7 @@ export default defineConfig({
       '@pages': '/src/pages',
       '@hooks': '/src/hooks',
       '@services': '/src/services',
-      '@contexts': '/src/contexts',
+      '@store': '/src/store',
       '@types': '/src/types',
       '@utils': '/src/utils',
       '@assets': '/src/assets',
