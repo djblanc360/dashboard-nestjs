@@ -1,22 +1,36 @@
-import { Body, Controller, Get, Param, Post, Query, BadRequestException } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, BadRequestException, Req } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { InvoicesService } from './invoices.service';
 import { Invoice } from '@prisma/client';
 import { getInvoicesDto, getInvoiceDto, postInvoiceDto, getInvoicesTotalDto } from './invoices.dto';
+import { FastifyRequest, FastifyReply } from 'fastify';
+
+interface PaginationQuery {
+    page?: string;
+    limit?: string;
+  }
 
 @Controller('invoices') // route prefix
 export class InvoicesController {
     constructor(private readonly invoicesService: InvoicesService) {}
 
     @Get()
-    async getInvoices(@Query() query: unknown): Promise<Invoice[]> {
+    async getInvoices(
+        @Query() query: unknown, 
+        @Req() request: FastifyRequest<{ Querystring: PaginationQuery }>,
+    ): Promise<Invoice[]> {
         const result = getInvoicesDto.safeParse(query);
         if (!result.success) {
             throw new BadRequestException(result.error.errors);
         }
 
+        const page = parseInt(request.query.page || '1', 10); 
+        const limit = parseInt(request.query.limit || '3', 10);
+        const skip = (page - 1) * limit;
+
         return this.invoicesService.getInvoices({
-            take: result.data.take,
+            take: limit,
+            skip,
             orderBy: {
                 id: 'asc',
             },
