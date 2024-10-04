@@ -1,4 +1,5 @@
 export const fetchInvoices = async ({ page = 1, limit = 10 }: { page?: number; limit?: number }) => {
+    console.log('fetchInvoices', page, limit);
     const response = await fetch(`http://localhost:3000/invoices?page=${page}&limit=${limit}`, {
         method: 'GET',
     });

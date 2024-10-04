@@ -7,7 +7,13 @@ export default {
     '!./node_modules/**/*'      // exclude node_modules just in case
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'dark-blue': '#202844',
+        'mid-blue': '#273575',
+        'off-white': '#fafafa',
+      },
+    },
   },
   plugins: [],
 } satisfies Config
