@@ -1,21 +1,30 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { fetchInvoices } from '@store/invoiceSlice';
+// import { useEffect } from 'react';
+// import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { useQuery } from '@tanstack/react-query';
+
+import { fetchInvoices } from '@services/invoiceService';
+import { Invoice } from '../types/invoice';
 
 const InvoiceList = () => {
-    const invoices = useAppSelector((state) => state.invoices.invoices);
-    const loading = useAppSelector((state) => state.invoices.loading);
-    const dispatch = useAppDispatch();
+    const { data, isLoading, isError, error } = useQuery({
+        queryKey: ['invoices', { page: 1, limit: 5 }],
+        queryFn: () => fetchInvoices({ page: 1, limit: 5 })
+    });
+    // const invoices = useAppSelector((state) => state.invoices.invoices);
+    // const loading = useAppSelector((state) => state.invoices.loading);
+    // const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        dispatch(fetchInvoices({ page: 1, limit: 5 }));
-    }, [dispatch]);
-
-    if (loading) {
+    if (isLoading) {
         return <p>Retrieving invoices...</p>;
     }
 
-    if (!invoices || invoices.length === 0) {
+    if (isError) {
+        return <p>Error: {error.message}</p>;
+    }  
+
+    const invoices = data?.invoices || [];
+
+    if (invoices.length === 0) {
         return <p>No available invoices</p>;
     }
 
@@ -23,7 +32,7 @@ const InvoiceList = () => {
 
     return (
         <ul>
-            {invoices.map((invoice) => (
+            {invoices.map((invoice: Invoice) => (
                 <li key={invoice.id}>{invoice.vendor_name}</li>
             ))}
         </ul>
