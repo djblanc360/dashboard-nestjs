@@ -4,6 +4,10 @@ import { createHash } from 'crypto';
 
 const prisma = new PrismaClient()
 async function main() {
+    // re-seed
+    await prisma.invoice.deleteMany();
+    await prisma.user.deleteMany();
+
     const account1 = await prisma.user.upsert({
         where: {email: 'peacelily@seed.com'},
         update: {},
@@ -21,7 +25,14 @@ async function main() {
                         paid: false,
                     },
                     {
-                        vendor_name: 'The Potted Things',
+                        vendor_name: 'Plant Parenthood',
+                        amount: 10.00,
+                        due_date: new Date('2024-10-8'),
+                        description: 'vendor description',
+                        paid: true,
+                    },
+                    {
+                        vendor_name: 'Bloomingdales',
                         amount: 10.00,
                         due_date: new Date('2024-10-8'),
                         description: 'vendor description',
@@ -41,14 +52,14 @@ async function main() {
             invoices: {
                 create: [
                     {
-                        vendor_name: 'The Potted Things',
+                        vendor_name: 'Succulululemon',
                         amount: 20.00,
                         due_date: new Date('2024-10-8'),
                         description: 'vendor description',
                         paid: false,
                     },
                     {
-                        vendor_name: 'The Potted Things',
+                        vendor_name: 'Loam Depot',
                         amount: 30.00,
                         due_date: new Date('2024-10-8'),
                         description: 'vendor description',
@@ -73,7 +84,14 @@ async function main() {
                         due_date: new Date('2024-10-7'),
                         description: 'vendor description',
                         paid: false,
-                    }
+                    },
+                    {
+                        vendor_name: 'Sproutbucks',
+                        amount: 20.00,
+                        due_date: new Date('2024-10-7'),
+                        description: 'vendor description',
+                        paid: true,
+                    },
                 ],
             },
         },
