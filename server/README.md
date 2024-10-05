@@ -1,14 +1,24 @@
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
+# Backend using NestJS, Fastify, Prisma ORM, and PostgreSQL
 
 ## Features
-
-- seeding the database
-- included POST invoices to easily add more invoices in POSTMAN
+- replaced Express with Fastify for performance
+- handles user authentication with JWT
+- manages invoices y retrieving and sending invoices to the database
+- included `POST /invoice` to easily add more invoices in POSTMAN
 - limit of invoices is small to display pagination feature
+
+## Dependencies
+
+- [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository
+- [@nestjs/jwt](https://docs.nestjs.com/security/authentication#jwt-token) JWT utilities for authentication and authorization in NestJS applications
+- [@nestjs/platform-fastify](https://docs.nestjs.com/techniques/performance) for using NestJS with the Fastify for enhanced performance
+- [Prisma](https://www.prisma.io/docs) ORM for interacting with Supabase database
+- [Supabase](https://supabase.com/docs) PostgreSQL database
+- [Pino-pretty](https://www.npmjs.com/package/pino-pretty) formatter for Fastify logs
+- [Bcrypt](https://www.npmjs.com/package/bcrypt) library for hashing and comparing passwords
+- [Dotenv](https://www.npmjs.com/package/dotenv)
+- [Zod](https://zod.dev) TypeScript schema validation
 
 ## Server Structure
 ```
@@ -67,6 +77,13 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+```
+
+### Seeding Database
+
+while in the `server/` directory
+```bash
+$ npx prisma db seed
 ```
 
 
