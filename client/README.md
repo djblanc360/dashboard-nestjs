@@ -1,66 +1,74 @@
 
+## Description
+
+
+
+
+## Features
 
 - an unidentified user attempting to view `/invoices` is redirected to `login/`
 - when the user logs in as is identified, they will be redirected to `/invoices`
-- limit of invoices is small to display pagination feature
 
-
-
-
-
-
-
-
-
-
-
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Client Structure
+```
+dashboard-nestjs/
+├── client/                          # react frontend
+│   ├── public/                      
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Account.tsx         # logged in user state
+│   │   │   ├── InvoiceList.tsx     # list of invoices
+│   │   │   ├── InvoiceModal.tsx    # modal for an invoice
+│   │   │   ├── Login.tsx           # logged out user state
+│   │   │   └── Navbar.tsx  	      
+│   │   ├── pages/                  # views/pages
+│   │   │   ├──  HomePage.tsx
+│   │   │   ├──  InvoicesPage.tsx
+│   │   │   └──  LoginPage.tsx
+│   │   ├── hooks/                   # custom react hooks
+│   │   ├── services/                # api calls to backend
+│   │   │   ├── invoiceService.ts
+│   │   │   └── loginService.ts
+│   │   ├── store/                   # redux store for global state
+│   │   │   ├── authSlice.ts         # user authentication, store user data
+│   │   │   ├── hooks.ts             # typed versions of useDispatch & useSelector
+│   │   │   ├── index.ts             # sets up store, state and dispatch
+│   │   │   └── invoiceSlice.ts      # updae selected invoice, access invoices
+│   │   ├── types/                   # shared typeScript types
+│   │   │   ├── invoice.ts
+│   │   │   ├── user.ts.
+│   │   ├── utils/                   # utility functions   
+│   │   ├── App.tsx                  # main app component
+│   │   ├── main.tsx                 # entry point for React
+│   │   ├──vite-env.d.ts       
+│   │   └── index.css                # tailwind  
+│   ├── index.html
+│   ├── package.json                 
+│   ├── tsconfig.json                # typeScript configuration
+│   └── vite.config.ts               # vite configuration
+├── README.md                        
+└── .gitignore                      
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Usage
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### Installation
+
+```bash
+$ npm install
 ```
+
+### Run Options
+
+```bash
+# development
+$ npm run dev
+```
+
+
+## Authors
+
+* [@Daryl Blancaflor](djblanc360@gmail.com)
+
+## Version History

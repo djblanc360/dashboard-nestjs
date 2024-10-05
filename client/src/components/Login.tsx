@@ -8,6 +8,13 @@ import { useAppDispatch } from '@store/hooks';
 import { loggingIn } from '@store/authSlice';
 import { User } from '../types/user';
 
+import { z } from 'zod';
+
+export const loginSchema = z.object({
+    email: z.string().email('Invalid email address'),
+    password: z.string().min(8, 'Password must be at least 8 characters'),
+});
+
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -37,6 +44,12 @@ const Login = () => {
             email: email,
             password: password,
         };
+        const valid = loginSchema.safeParse(data);
+        if (!valid.success) {
+            setError(valid.error.errors[0]?.message || 'Invalid credentials');
+            return;
+        }
+
         mutation.mutate(data);
     };
 
