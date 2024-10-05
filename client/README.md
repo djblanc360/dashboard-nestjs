@@ -1,3 +1,19 @@
+
+
+- an unidentified user attempting to view `/invoices` is redirected to `login/`
+- when the user logs in as is identified, they will be redirected to `/invoices`
+- limit of invoices is small to display pagination feature
+
+
+
+
+
+
+
+
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

@@ -1,3 +1,9 @@
+
+- seeding the database
+- included POST invoices to easily add more invoices in POSTMAN
+- limit of invoices is small to display pagination feature
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>

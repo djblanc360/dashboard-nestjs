@@ -1,31 +1,39 @@
-import { Icon } from '@mui/material';
+
 import PersonIcon from '@mui/icons-material/Person';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from 'react';
 
+import { useAppSelector } from '@store/hooks';
+import { currentUser } from '@store/authSlice';
+
+
 const NavBar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const user = useAppSelector(currentUser);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
+    <header className="absolute inset-x-0 top-0 z-50 lg:px-12 lg:py-4">
       <div className="flex items-center justify-between p-4">
         <a href="/" className="-m-1.5 p-1.5">
           <span className="sr-only">Altametrics</span>
-          <img className="h-8 w-auto" src="public/altametrics.png" alt="Logo" />
+          <img className="h-8 w-auto" src="/altametrics.png" alt="Logo" />
         </a>
 
-        {/* Desktop Menu */}
+        {/* desktop */}
         <nav className="hidden lg:flex space-x-6">
-          <a href="/invoices" className="text-secondary font-semibold hover:text-mid-blue">
+          <div className="flex min-w-60 justify-between">
+          <a href="/invoices" className="text-secondary font-semibold p-2 hover:text-mid-blue hover:bg-secondary hover:font-bold">
             Invoices
           </a>
-          <a href="/login" className="text-secondary font-semibold hover:text-mid-blue">
+          <a href="/login" className="text-secondary font-semibold p-2 hover:text-mid-blue hover:bg-secondary  hover:font-bold">
+            {user ? `${user.name}`: 'Login'} 
             <PersonIcon className="h-6 w-6" />
           </a>
+          </div>
         </nav>
         
-        {/* Toggle Button */}
+        {/* toggle */}
         <button
           onClick={() => setNavbarOpen(!navbarOpen)}
           type="button"
@@ -35,7 +43,7 @@ const NavBar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* mobile */}
       {navbarOpen && (
         <div className="lg:hidden" role="dialog" aria-modal="true">
           <div className="fixed inset-0 z-50 bg-gray-600 opacity-50" onClick={() => setNavbarOpen(false)}></div>
@@ -45,7 +53,7 @@ const NavBar = () => {
                 <span className="sr-only">Altametrics</span>
                 <img
                   className="h-8 w-auto"
-                  src="public/altametrics.png"
+                  src="/altametrics.png"
                   alt="Logo"
                 />
               </a>
