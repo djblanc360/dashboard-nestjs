@@ -8,6 +8,7 @@
 - an unidentified user attempting to view `/invoices` is redirected to `login/`
 - when the user logs in as is identified, they will be redirected to `/invoices`
 
+
 ## Dependencies
 
 - [@mui/icons-material](https://mui.com/material-ui/material-icons/)  - Material UI icons
@@ -78,6 +79,15 @@ $ npm install
 $ npm run dev
 ```
 
+### Test Users
+email: peacelily@seed.com
+password: test1234
+
+email: monstera+albo@seed.com
+password: test7777
+
+email: basil@seed.com
+password: test5678
 
 ## Authors
 

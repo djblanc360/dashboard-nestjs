@@ -86,6 +86,40 @@ while in the `server/` directory
 $ npx prisma db seed
 ```
 
+### Postman Query Examples
+
+Retrieve all invoices:
+`GET http://localhost:3000/invoices?page=1&limit=5`
+or
+`GET http://localhost:3000/invoices`
+
+Retrieve an invoice:
+`GET http://localhost:3000/invoices/3`
+
+Invoice total by date:
+`GET http://localhost:3000/invoices/total?due_date=2024-10-08`
+
+Create an invoice for existing user:
+`POST http://localhost:3000/invoices`
+```json
+{
+  "vendor_name": "Post test",
+  "amount": 10.00,
+  "due_date": "2024-10-09",
+  "description": "testing new vendor",
+  "user_id": 3,  // Basil
+  "paid": false
+}
+```
+
+User login:
+`POST http://localhost:3000/auth/login`
+```json
+{
+    "email": "peacelily@seed.com",
+    "password": "test1234"
+}
+```
 
 ## Authors
 
